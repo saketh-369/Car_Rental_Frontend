@@ -5,13 +5,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const navLinks = [
-    { path: "/", value: "Home" },
-    { path: "/about", value: "About Us" },
-    { path: "/vehicles", value: "Vehicles" },
-    { path: "/membership", value: "Membership" },
-    { path: "/contact", value: "Contact" },
-    { path: "/admin/login", value: "Admin" },
-    { path: "/user/signup", value: "SignUp" },
+    { path: "/", value: "Home" }
   ];
 
   const toggleDropdown = () => {

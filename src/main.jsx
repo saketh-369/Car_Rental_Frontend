@@ -14,6 +14,7 @@ import Dashboard from './components/user/Dashboard';
 import AdminLayout from './layout/AdminLayout';
 import AdminSignup from './components/admin/AdminSignup';
 import AdminLogin from './components/admin/AdminSignin';
+import AuthLayout from './layout/AuthLayout';
 
 
 
@@ -24,14 +25,7 @@ const router = createBrowserRouter([{
       path: "/",
       element: <App />
     },
-    {
-      path: "/user/signup",
-      element: <SignupPage />
-    },
-    {
-      path: "/user/login",
-      element: <SigninPage />
-    },
+    
     {
       path: "user/dashboard",
       element: <Dashboard />,
@@ -45,6 +39,21 @@ const router = createBrowserRouter([{
 {
   element: <AdminLayout />,
   children: [
+    
+
+  ]
+},
+{
+  element: <AuthLayout />,
+  children: [
+    {
+      path: "/user/signup",
+      element: <SignupPage />
+    },
+    {
+      path: "/user/login",
+      element: <SigninPage />
+    },
     {
       path: "admin/signup",
       element: <AdminSignup />
@@ -53,7 +62,6 @@ const router = createBrowserRouter([{
       path: "admin/login",
       element: <AdminLogin />
     }
-
   ]
 }
 ]);
