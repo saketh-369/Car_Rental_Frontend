@@ -22,6 +22,9 @@ const Signup = () => {
       const res = await axios.post(
         "http://localhost:3000/api/v1/admin/login",
         data,
+        {
+          withCredentials: true,
+        }
       );
       const resData = await res.data;
         if (resData === "Logged in") {
