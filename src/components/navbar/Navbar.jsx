@@ -1,21 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navLinks = [
     { path: "/", value: "Home" },
     { path: "/about", value: "About Us" },
-    { path: "/vehicles", value: "Vehicles" },
-    { path: "/membership", value: "Membership" },
+    { path: "/user/dashboard", value: "Dashboard" },
     { path: "/contact", value: "Contact" },
-    { path: "/admin/login", value: "Admin" },
-    { path: "/user/signup", value: "SignUp" },
+    { path: "/admin", value: "Admin" },
+    // { path: "/admin/login", value: "Admin" },
+    { path: "/user/signup", value: "Logout" },
   ];
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleLogout = () => {
+    Cookies.remove('token'); // remove the cookie
+    navigate('/user/signup'); // navigate to the logout path
   };
 
   return (
@@ -28,7 +35,12 @@ const Navbar = () => {
       </div>
       <nav className="hidden sm:flex flex-row space-x-6 mb-4 sm:mb-0">
         {navLinks.map((link, index) => (
-          <Link key={index} to={link.path} className="hover:text-indigo-500 transition duration-300">
+          <Link
+            key={index}
+            to={link.path}
+            className="hover:text-indigo-500 transition duration-300"
+            onClick={link.value === 'Logout' ? handleLogout : null}
+          >
             {link.value}
           </Link>
         ))}
@@ -38,7 +50,16 @@ const Navbar = () => {
           <ul className="flex flex-col space-y-2 p-4">
             {navLinks.map((link, index) => (
               <li key={index}>
-                <Link to={link.path} className="text-gray-900 hover:text-indigo-500 transition duration-300" onClick={() => setDropdownOpen(false)}>
+                <Link
+                  to={link.path}
+                  className="text-gray-900 hover:text-indigo-500 transition duration-300"
+                  onClick={() => {
+                    if (link.value === 'Logout') {
+                      handleLogout();
+                    }
+                    setDropdownOpen(false);
+                  }}
+                >
                   {link.value}
                 </Link>
               </li>

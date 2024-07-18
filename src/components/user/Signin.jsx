@@ -29,7 +29,7 @@ const Signup = () => {
       const resData = res.data;
       if (resData.token) {
         Cookies.set('token', resData.token, { expires: 1 }); // Store token in cookies
-        navigate("/user/dashboard");
+        navigate("/");
       } else {
         console.error("Signup failed: No token received");
       }
@@ -58,9 +58,9 @@ const Signup = () => {
         {errors.password && <span className="text-red-600">{errors.password.message}</span>}
         
         <p>
-          Already have an account?{" "}
-          <Link to="/user/login" className="text-blue-500 underline">
-            Login
+           new user?{" "}
+          <Link to="/user/signup" className="text-blue-500 underline">
+            Signup
           </Link>
         </p>
         <input 

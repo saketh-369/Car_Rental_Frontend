@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
+import Cookies from 'js-cookie';
 
 
 
@@ -20,21 +20,26 @@ const Signup = () => {
     const {register, handleSubmit,formState: { errors }} = useForm( {resolver : yupResolver(userSchema)});
     const navigate = useNavigate();
     
-    const onSubmit = async(data) => {
-      
-      const res = await axios.post(
-        "http://localhost:3000/api/v1/user/signup",
-        data,
-        {
-          withCredentials: true,
+    const onSubmit = async (data) => {
+      try {
+        const res = await axios.post(
+          "http://localhost:3000/api/v1/user/signup",
+          data,
+          {
+            withCredentials: true,
+          }
+        );
+        const resData = res.data;
+        if (resData.token) {
+          Cookies.set('token', resData.token, { expires: 1 }); // Store token in cookies
+          navigate("/");
+        } else {
+          console.error("Signup failed: No token received");
         }
-      );
-      const resData = await res.data;
-      
-        if (resData === "registered successfully") {
-          navigate("/user/dashboard");
-        }
-    };
+      } catch (error) {
+        console.error("Signup error:", error);
+      }
+    }
 
 
   return (
@@ -52,7 +57,7 @@ const Signup = () => {
       <p>
         User already exist{" "}
         <Link to="/user/login" className="text-blue-500 underline">
-          Signin
+          login
         </Link>
       </p>
     <input type="submit" className="mt-4 border rounded-md border-solid bg-gray-500 hover:bg-gray-800 text-white hover:border-gray-500"/>

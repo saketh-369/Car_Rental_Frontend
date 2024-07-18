@@ -23,6 +23,9 @@ import AdminApp from './pages/admin/AdminApp';
 import UserRoutes from './components/protected-routes/UserRoutes';
 import { Provider } from 'react-redux';
 import {store} from './Redux/store'; 
+import AdminRoutes from './components/protected-routes/AdminRoutes';
+import AboutUs from './components/user/About';
+import ContactUs from './components/user/ContactUs';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,14 @@ const router = createBrowserRouter([
       {
         path: 'user/dashboard',
         element:<Dashboard />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs/> ,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
       },
       {
         path: '/vehicle',
@@ -60,7 +71,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <AdminLayout />,
+    element: (
+    <AdminRoutes>
+      <AdminLayout />
+    </AdminRoutes>
+    ),
     children: [
       {
         path: "/admin/dashboard",
@@ -84,7 +99,7 @@ const router = createBrowserRouter([
         element: <AdminSignup />,
       },
       {
-        path: 'admin/login',
+        path: 'admin',
         element: <AdminLogin />,
       },
     ],

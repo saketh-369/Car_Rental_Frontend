@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from 'js-cookie';
 
 
 
@@ -20,21 +20,26 @@ const Signup = () => {
     const {register, handleSubmit,formState: { errors }} = useForm( {resolver : yupResolver(userSchema)});
     const navigate = useNavigate();
     
-    const onSubmit = async(data) => {
-      
-      const res = await axios.post(
-        "http://localhost:3000/api/v1/admin/signup",
-        data,
-        {
-          withCredentials: true,
-        }
-      );
-      const resData = await res.data;
-      
-        if (resData === "registered successfully") {
+    const onSubmit = async (data) => {
+      try {
+        const res = await axios.post(
+          "http://localhost:3000/api/v1/admin/signup",
+          data,
+          {
+            withCredentials: true,
+          }
+        );
+        const resData = res.data;
+        if (resData.token) {
+          Cookies.set('token', resData.token, { expires: 1 }); // Store token in cookies
           navigate("/admin/dashboard");
+        } else {
+          console.error("Signup failed: No token received");
         }
-    };
+      } catch (error) {
+        console.error("Signup error:", error);
+      }
+    }
 
 
   return (

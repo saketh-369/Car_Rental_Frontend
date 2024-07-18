@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Dealer from './Dealer';
 import Vehicle from './Vehicle';
+import Cookies from 'js-cookie';
 
 const Sidebar = ({ setActiveSection }) => (
   <Box as="nav" w="250px" p="4" bg="gray.100">
@@ -25,6 +26,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    Cookies.remove('token')
     // Perform any logout logic here (e.g., clearing tokens, etc.)
     navigate('/'); // Navigate to home page
   };
