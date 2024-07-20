@@ -21,7 +21,7 @@ const Signup = () => {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
-        "https://carrental-5592.onrender.com/api/v1/user/login",
+        `${import.meta.env.vite}/user/login`,
         data,
         {
           withCredentials: true,
