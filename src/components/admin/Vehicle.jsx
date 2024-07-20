@@ -64,7 +64,7 @@ const VehicleForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     axios
-      .post('http://localhost:3000/api/v1/admin/vehiclelist', vehicle)
+      .post(`${API}/admin/vehiclelist`, vehicle)
       .then(response => {
         console.log('Vehicle added:', response.data);
         setIsOpen(true); // Open the success dialog
