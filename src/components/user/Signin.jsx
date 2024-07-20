@@ -4,7 +4,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-// import { API } from "../../api";
+import { API } from "../../api";
 
 // Define validation schema using Yup
 let userSchema = yup.object({
@@ -21,7 +21,7 @@ const Signup = () => {
   const onSubmit = async (data) => {
     try {
       const res = await axios.post(
-        `${import.meta.env.vite}/user/login`,
+        `${API}/user/login`,
         data,
         {
           withCredentials: true,
