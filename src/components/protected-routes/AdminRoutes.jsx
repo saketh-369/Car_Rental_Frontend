@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../Redux/token";
 import Cookies from 'js-cookie';
+import { API } from "../../api";
 
 const AdminRoutes = ({ children }) => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const AdminRoutes = ({ children }) => {
         const checkUser = async () => {
             try {
                 const res = await axios.get(
-                    "http://localhost:3000/api/v1/admin/check-admin",
+                    `${API}/admin/check-admin`,
                     {
                         headers: {
                             'Authorization': `${token}`

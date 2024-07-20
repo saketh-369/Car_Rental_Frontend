@@ -2,6 +2,7 @@ import { Box, Heading, Text, Stack, Flex, Card, CardHeader, CardBody, CardFooter
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { API } from '../../api';
 
 const Vehicle = () => {
   const location = useLocation();
@@ -12,7 +13,7 @@ const Vehicle = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/user/get-vehicle');
+        const response = await axios.get(`${API}/user/get-vehicle`);
         setItems(response.data);
       } catch (error) {
         console.log('Error fetching data: ', error.message);

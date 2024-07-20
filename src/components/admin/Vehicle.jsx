@@ -20,6 +20,7 @@ import {
   AlertDialogOverlay,
 } from '@chakra-ui/react';
 import axios from 'axios';
+import { API } from '../../api';
 
 const VehicleForm = () => {
   const [dealers, setDealers] = useState([]);
@@ -39,7 +40,7 @@ const VehicleForm = () => {
   useEffect(() => {
     // Fetch dealer IDs from the backend
     axios
-      .get('http://localhost:3000/api/v1/admin/get-dealer')
+      .get(`${API}/admin/get-dealer`)
       .then(response => {
         setDealers(response.data);
         setLoading(false);

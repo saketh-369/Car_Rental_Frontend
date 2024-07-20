@@ -4,7 +4,7 @@ import * as yup from "yup"
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-
+import { API } from "../../api";
 
 
 let userSchema = yup.object({
@@ -23,7 +23,7 @@ const Signup = () => {
     const onSubmit = async (data) => {
       try {
         const res = await axios.post(
-          "http://localhost:3000/api/v1/user/signup",
+          `${API}/user/signup`,
           data,
           {
             withCredentials: true,

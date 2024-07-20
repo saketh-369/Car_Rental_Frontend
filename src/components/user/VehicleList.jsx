@@ -14,6 +14,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { API } from "../../api";
 
 const VehicleList = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -24,7 +25,7 @@ const VehicleList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/v1/user/get-vehicle")
+      .get(`${API}/user/get-vehicle`)
       .then((response) => {
         setVehicles(response.data);
         setLoading(false);

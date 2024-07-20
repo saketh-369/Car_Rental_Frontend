@@ -8,6 +8,7 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
+import { API } from '../../api';
 
 const Dealer = ({ setActiveSection }) => {
   const [formData, setFormData] = useState({
@@ -49,7 +50,7 @@ const Dealer = ({ setActiveSection }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/v1/admin/dealer', {
+      const response = await fetch(`${API}/admin/dealer`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
